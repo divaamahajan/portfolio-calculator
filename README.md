@@ -1,13 +1,10 @@
 
 # Portfolio Calculator
 
-A portfolio calculator for stocks. [Deployed Here](https://portfolio-calculator-v2.vercel.app/)
+A portfolio calculator for stocks. [Deployed Here](https://stock-portfolio-calculator.vercel.app)
 
 
 ## Author
-
-- GitHub: [@andepants](https://github.com/andepants)
-- Github: [@dmwcats123](https://github.com/dmwcats123)
 - Github: [@divaamahajan](https://github.com/divaamahajan)
 
 ## Features
