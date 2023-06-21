@@ -10,9 +10,8 @@ const PortfolioAllocationTable = (props) => {
     return total;
   };
 
-  const initialTotal = calculateTotal(initialAllocation)
-  const finalTotal = calculateTotal(finalAllocation)
-
+  const initialTotal = calculateTotal(initialAllocation);
+  const finalTotal = calculateTotal(finalAllocation);
   return (
     <div className="portfolio-value-table-container">
       <h2 className="portfolio-value-table-title">Portfolio Allocation</h2>
@@ -42,7 +41,10 @@ const PortfolioAllocationTable = (props) => {
         <tr>
           <th>Total (USD)</th>
           <th>$ {initialTotal}</th>
-          <th>$ {finalTotal} ({(((finalTotal-initialTotal)*100)/initialTotal).toFixed(2)}%)</th>
+          <th>
+            $ {finalTotal} (
+            {(((finalTotal - initialTotal) * 100) / initialTotal).toFixed(2)}%)
+          </th>
         </tr>
       </table>
     </div>

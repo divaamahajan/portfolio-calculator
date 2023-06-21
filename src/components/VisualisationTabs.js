@@ -5,7 +5,7 @@ import PortfolioAllocationChartWithLegend from "./PortfolioAllocationChartWithLe
 import PortfolioValueTable from "./PortfolioValueTable";
 import "../styles/VisualisationTabs.css";
 import PortfolioValueLineChart from "./PortfolioValueLineChart";
-// import PortfolioValueStackedBarChart from "./PortfolioValueStackedBarChart";
+import PortfolioValueStackedBarChart from "./PortfolioValueStackedBarChart";
 // import StockPriceCandlestickChart from "./StockPriceCandlestickChart";
 // import CompanyProfitsBarChart from "./CompanyProfitsBarChart";
 import CumulativeProfitsAreaChart from "./CumulativeProfitsAreaChart";
@@ -18,6 +18,9 @@ const VisualisationTabs = (props) => {
   const endDate = userInputData.endDate;
   const initialBalance = userInputData.initialBalance; // 32500
   const portfolioAllocation = userInputData.portfolioAllocation; //AAPL: 0.2,   GOOG: 0.5,  MSFT: 0.3
+  console.log("portfolioAllocation", portfolioAllocation)
+  console.log("tradingData", tradingData)
+  console.log("userInputData", userInputData)
 
   const portfolioValue = {};
   Object.keys(tradingData.data).forEach((stock) => {
@@ -27,12 +30,12 @@ const VisualisationTabs = (props) => {
     stockDates.sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
 
     const defaultStartDate = stockDates[stockDates.length - 1]; // oldest date as the default start date
-    // console.log('right before line 32');
+    // console.log("right before line 32");
     stockDates.forEach((date) => {
-      // console.log('inside stockDates.forEach');
-      //console.log(date, startDate, endDate);
+      // console.log("inside stockDates.forEach");
+      // console.log(date, startDate, endDate);
       if (date >= startDate && date <= endDate) {
-        // console.log('inside if statement');
+        // console.log("inside if statement");
         if (!portfolioValue[date]) {
           portfolioValue[date] = {
             total: 0,
@@ -49,7 +52,7 @@ const VisualisationTabs = (props) => {
 
         portfolioValue[date].stocks[stock] = stockValue;
         portfolioValue[date].total += stockValue;
-        // console.log(portfolioValue[date].total)
+        // console.log("portfolioValue[date].total", portfolioValue[date].total);
 
         const initialStockPrice = !stockData[startDate]
           ? stockData[defaultStartDate].close // Use the default start date for initial stock price
@@ -114,8 +117,8 @@ const VisualisationTabs = (props) => {
           <Tab className="custom-tab">Daily Portfolio Value Table</Tab>
           <Tab className="custom-tab">Daily Portfolio Value Line Chart</Tab>
           {/* <Tab className="custom-tab">Daily Portfolio Value Stacked Bar Chart</Tab> */}
-          {/* <Tab className="custom-tab">Stock Price Candlestick Chart</Tab>
-          <Tab className="custom-tab">Daily Profits and Losses of Company</Tab> */}
+          {/* <Tab className="custom-tab">Stock Price Candlestick Chart</Tab> */}
+          <Tab className="custom-tab">Daily Profits and Losses of Company</Tab>
           <Tab className="custom-tab">Cumulative Profits and Losses</Tab>
         </TabList>
 
@@ -136,15 +139,15 @@ const VisualisationTabs = (props) => {
             portfolioValuePerDay={result.portfolioValuePerDay}
           />
         </TabPanel>
-        {/* <TabPanel>
+        <TabPanel>
           <PortfolioValueStackedBarChart
             portfolioValuePerDay={result.portfolioValuePerDay}
           />
-        </TabPanel> */}
+        </TabPanel>
         {/* <TabPanel>
           <StockPriceCandlestickChart tradingData={tradingData.data} />
-        </TabPanel>
-        <TabPanel>
+        </TabPanel> */}
+        {/* <TabPanel>
           <CompanyProfitsBarChart
             portfolioValuePerDay={result.portfolioValuePerDay}
           />

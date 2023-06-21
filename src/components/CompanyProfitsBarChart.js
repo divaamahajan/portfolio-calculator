@@ -69,7 +69,7 @@ const CompanyProfitsBarChart = ({ portfolioValuePerDay }) => {
   };
 
   return (
-    <div>
+    <div className="portfolio-value-table-container">
     <h2 className="portfolio-value-table-title">Profits and Losses per day </h2>
       <Chart options={chartData.options} series={chartData.series} type="bar" height={300} />
     </div>

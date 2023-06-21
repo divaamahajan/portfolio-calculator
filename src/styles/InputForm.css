@@ -1,140 +1,338 @@
-.input-form-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .input-form-row {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .input-form {
-    display: flex;
-    flex-direction: row;
-    background-color: #f7fafc;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .input-form-column {
-    flex: 1;
-  }
-  
-  .input-field {
-    margin-bottom: 10px;
-  }
-  
-  .input-field label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .input-field-text {
-    width: 100%;
-    padding: 8px;
-    border: 2px solid #cbd5e0;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  .symbol-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .symbol-list-item {
-    background-color: #f7fafc;
-    padding: 4px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .btn-primary,
-  .btn-secondary {
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-primary {
-    background-color: #051a3b;
-    color: #ffffff;
-  }
-  
-  .btn-secondary {
-    background-color: #d2d6dc;
-    color: #4a5568;
-    margin-left: 10px;
-  }
-  
-  .input-form-note {
-    font-size: 12px;
-    margin-top: 5px;
-    color: #718096;
-  }
-  
-  .input-form-error {
-    background-color: #fed7d7;
-    border: 1px solid #e53e3e;
-    color: #e53e3e;
-    padding: 8px;
-    border-radius: 4px;
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .current-allocation {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
-  .current-allocation h1,
-  .current-allocation h2 {
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  .stock-allocations {
-    list-style-type: none;
-    padding: 0;
-    margin: 30px 0;
-  }
-  
-  .stock-allocations li {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #010713; 
-  font-style: italic;
-  }
-  
-  .input-field-datepicker {
-    width: 100%;
-    padding: 8px;
-    border: 2px solid #cbd5e0;
-    border-radius: 4px;
-    font-size: 14px;
-  }
+.editIcon,
+.deleteIcon,
+.cancelIcon,
+.saveIcon,
+.addIcon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-size: cover;
+  cursor: pointer;
+}
+.addIcon {
+  width: 24px;
+  height: 24px;
+}
+.editIcon {
+  background-image: url("../static/icons/edit.png");
+}
 
-  .input-form-heading {
-    color: #02132e;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .input-form-subheading {
-    color: #4a5568;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    font-style: italic; 
-  }  
+.deleteIcon {
+  background-image: url("../static/icons/delete.png");
+}
+.cancelIcon {
+  background-image: url("../static/icons/cancel.png");
+}
+
+.saveIcon {
+  background-image: url("../static/icons/save.png");
+}
+
+.addIcon {
+  background-image: url("../static/icons/add.png");
+}
+.infoIcon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../static/icons/info.png");
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.deleteButton,
+.editButton,
+.saveButton,
+.addButton,
+.cancelButton {
+  position: relative;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.deleteButton::after,
+.editButton::after,
+.saveButton::after,
+.addButton::after,
+.cancelButton::after {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0000008c;
+  color: #fff;
+  padding: 2px;
+  border-radius: 4px;
+  font-size: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.deleteButton::after {
+  content: "Delete Stock";
+}
+.editButton::after {
+  content: "Edit Stock";
+}
+.saveButton::after {
+  content: "Save Changes";
+}
+.addButton::after {
+  content: "Add Stock";
+}
+.cancelButton::after {
+  content: "Cancel Changes";
+}
+.deleteButton:hover::after,
+.editButton:hover::after,
+.saveButton:hover::after,
+.addButton:hover::after,
+.cancelButton:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+.stock-allocations li {
+  display: flex;
+  justify-content: flex-end; /* Right-align the buttons */
+  align-items: center; /* Vertically center the buttons */
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #010713;
+  font-style: italic;
+}
+
+.input-form-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.input-form-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Adjust the value as per your preference */
+}
+
+.input-form {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.input-form-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-right: 20px;
+}
+
+.input-text-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-right: 20px;
+  align-items: center;
+  border: 1px solid #ddd; /* Add a border */
+  border-radius: 4px; /* Optional: Add border radius for rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.input-field {
+  margin-bottom: 10px;
+}
+
+.input-field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-field-text {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.input-field-datepicker {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.symbol-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.symbol-list-item {
+  background-color: #f7fafc;
+  padding: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #3182ce;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  margin-left: 10px;
+}
+
+.input-form-note {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #718096;
+}
+
+.input-form-error {
+  background-color: #fed7d7;
+  border: 1px solid #e53e3e;
+  color: #e53e3e;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.current-allocation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.current-allocation h1,
+.current-allocation h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.stock-allocations {
+  list-style-type: none;
+  padding: 0;
+  margin: 30px 0;
+  width: 300px;
+}
+
+.stock-allocation-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.allocation-item {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+.symbol {
+  font-weight: bold;
+  margin-right: 10px;
+  justify-self: start;
+}
+
+
+.description {
+  margin-right: 10px;
+  text-align: center;
+}
+
+.percentage {
+  margin-right: 10px;
+}
+
+.allocation-buttons-container {
+  display: flex;
+}
+
+.allocation-buttons-container button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-allocation-container {
+  display: flex;
+  align-items: center;
+}
+
+.edit-buttons-container {
+  margin-left: 10px;
+}
+
+.save-button,
+.add-button,
+.cancel-button {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #3182ce;
+  color: #fff;
+}
+
+.cancel-button {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+.add-button {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+.input-text-heading {
+  color: #2d3748;
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input-text-subheading {
+  color: #718096;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 10px; /* Add spacing between heading and subheading */
+  font-style: italic;
+}

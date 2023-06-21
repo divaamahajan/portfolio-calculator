@@ -12,4 +12,15 @@
     color: #051a3b;
   }
   
+  .text-customColor {
+    color: #0366d6; /* Replace with your preferred shade of blue */
+  }
+  .font-serif {
+    font-family: serif; /* Replace with your preferred serif font */
+  }
+  
+  /* Alternatively, for sans-serif font */
+  .font-sans {
+    font-family: sans-serif; /* Replace with your preferred sans-serif font */
+  }
   

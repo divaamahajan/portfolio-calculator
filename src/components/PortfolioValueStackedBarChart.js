@@ -1,66 +1,70 @@
 "use client";
-import React from 'react';
-import ReactApexChart from 'react-apexcharts';
 import "../styles/PortfolioValueStackedBarChart.css";
-import dynamic from "next/dynamic";
-const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
+import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
 
 const PortfolioValueStackedBarChart = ({ portfolioValuePerDay }) => {
-  // Prepare data for the StackedBarChart
-  const chartData = {
-    categories: [], // Array to store the dates
-    series: [], // Array to store the series data
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    const chartData = prepareChartData(portfolioValuePerDay);
+    createChart(chartRef.current, chartData);
+  }, [portfolioValuePerDay]);
+
+  const prepareChartData = (data) => {
+    const categories = [];
+    const series = [];
+
+    data.forEach((item) => {
+      const { date, stocks } = item;
+
+      categories.push(date);
+
+      Object.keys(stocks).forEach((stock) => {
+        const existingSeries = series.find((series) => series.label === stock);
+        if (existingSeries) {
+          existingSeries.data.push(stocks[stock]);
+        } else {
+          series.push({
+            label: stock,
+            data: [stocks[stock]],
+          });
+        }
+      });
+    });
+
+    return { categories, series };
   };
 
-  // Loop through the portfolioValuePerDay data
-  portfolioValuePerDay.forEach((item) => {
-    const { date, stocks } = item;
-
-    // Add the date to the categories array
-    chartData.categories.push(date);
-
-    // Loop through each stock in the stocks object
-    Object.keys(stocks).forEach((stock) => {
-      // Check if the series for the stock already exists, if not create it
-      const existingSeries = chartData.series.find((series) => series.name === stock);
-      if (existingSeries) {
-        // Add the value for the stock on the specific date
-        existingSeries.data.push(stocks[stock]);
-      } else {
-        // Create a new series for the stock and add the value for the specific date
-        chartData.series.push({
-          name: stock,
-          data: [stocks[stock]],
-        });
-      }
-    });
-  });
-
-  // Calculate the height of the chart based on the number of dates
-  const chartHeight = chartData.categories.length * 30;
-
-  // Configure the options for the StackedBarChart
-  const options = {
-    chart: {
-      stacked: true,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
+  const createChart = (canvas, data) => {
+    new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: data.categories,
+        datasets: data.series.map((serie) => ({
+          label: serie.label,
+          data: serie.data,
+        })),
       },
-    },
-    xaxis: {
-      categories: chartData.categories,
-    },
-    legend: {
-      position: 'top',
-    },
+      options: {
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+          },
+        },
+      },
+    });
   };
 
   return (
-    <div>
-      <h2 className="chart-title">Portfolio Value per Day Stacked Bar Chart</h2>
-      <ApexCharts options={options} series={chartData.series} type="bar" height={chartHeight} />
+    <div className="portfolio-value-table-container">
+      <h2 className="portfolio-value-table-title">
+        Daily Profits and Losses of the company
+      </h2>
+      <canvas ref={chartRef} />
     </div>
   );
 };

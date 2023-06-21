@@ -11,11 +11,14 @@ const CumulativeProfitsAreaChart = ({ portfolioValuePerDay }) => {
 
   const colors = randomColor({
     count: Object.keys(data[0]).filter((key) => key !== 'date').length,
-    luminosity: 'bright', // Use 'dark' for darker colors
+    hue: 'blue',
+    luminosity: 'light', // Use 'dark' for darker shades of blue
     format: 'rgb',
   });
-
+  
   return (
+    <div className="portfolio-value-table-container">
+    <h2 className="portfolio-value-table-title">Cumulative Profits </h2>
     <AreaChart width={600} height={300} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
@@ -34,6 +37,7 @@ const CumulativeProfitsAreaChart = ({ portfolioValuePerDay }) => {
           />
         ))}
     </AreaChart>
+    </div>
   );
 };
 

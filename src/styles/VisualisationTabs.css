@@ -1,72 +1,72 @@
-
+/* Trading Table */
 .trading-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #f8f8f8;
-    font-family: 'Montserrat', sans-serif;
-  }
-  
-  .trading-table th,
-  .trading-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .trading-table th {
-    background-color: #2d9cdb;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-  
-  .trading-table tbody tr:nth-child(even) {
-    background-color: #f1f1f1;
-  }
-  
-  .trading-table .date-column {
-    min-width: 120px;
-  }
-  
-  .trading-table .value-column,
-  .trading-table .profit-column {
-    min-width: 100px;
-    text-align: right;
-  }
-  
-  .trading-table .allocation-column {
-    min-width: 80px;
-  }
-  
-  .trading-table .stock-column {
-    min-width: 120px;
-    text-align: right;
-  }
-  
-  .trading-table .header-row th,
-  .trading-table .header-row td {
-    font-size: 14px;
-    font-weight: normal;
-    text-transform: uppercase;
-    color: #555;
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-  
-  .trading-table .data-row td {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .trading-table .data-row .positive-profit {
-    color: green;
-  }
-  
-  .trading-table .data-row .negative-profit {
-    color: red;
-  }
-  
-/* MyComponent.css */
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.trading-table th,
+.trading-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.trading-table th {
+  background-color: #2980b9;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.trading-table tbody tr:nth-child(even) {
+  background-color: #ecf0f1;
+}
+
+.trading-table .date-column {
+  min-width: 120px;
+}
+
+.trading-table .value-column,
+.trading-table .profit-column {
+  min-width: 100px;
+  text-align: right;
+}
+
+.trading-table .allocation-column {
+  min-width: 80px;
+}
+
+.trading-table .stock-column {
+  min-width: 120px;
+  text-align: right;
+}
+
+.trading-table .header-row th,
+.trading-table .header-row td {
+  font-size: 14px;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #555555;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.trading-table .data-row td {
+  font-size: 16px;
+  color: #333333;
+}
+
+.trading-table .data-row .positive-profit {
+  color: #27ae60;
+}
+
+.trading-table .data-row .negative-profit {
+  color: #c0392b;
+}
+
+/* Custom Tabs */
 .custom-tab-list {
   display: flex;
   margin-bottom: 10px;
@@ -75,14 +75,14 @@
 
 .custom-tab {
   padding: 10px 20px;
-  background-color: #051a3b;
-  border: 1px solid #ccc;
+  background-color: #3498db;
+  border: 1px solid #95a5a6;
   border-bottom: none;
   border-radius: 5px 5px 0 0;
   cursor: pointer;
-  color: #ffffff; /* Tab text color */
-  font-weight: bold; /* Make the tab text bold */
-  text-align: center; /* Center align the tab text */
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
 }
 
 .custom-tab:first-child {
@@ -94,13 +94,13 @@
 }
 
 .custom-tab:hover {
-  background-color: #055159;
+  background-color: #2980b9;
 }
 
 .react-tabs__tab--selected {
   background-color: #ffffff;
-  border-color: #ccc;
+  border-color: #95a5a6;
   border-bottom: none;
   border-radius: 5px 5px 0 0;
-  color: #051a3b; /* Selected tab text color */
+  color: #333333;
 }

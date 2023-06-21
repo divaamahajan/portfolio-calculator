@@ -13,8 +13,8 @@ const PortfolioValueLineChart = ({ portfolioValuePerDay }) => {
   const yAxisDomain = [lowestValue - 100, 'auto'];
 
   return (
-    <div>
-      <h2 className="chart-title">Portfolio Value Line Chart</h2>
+    <div className="portfolio-value-table-container">
+      <h2 className="portfolio-value-table-title">Portfolio Value Line Chart</h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />

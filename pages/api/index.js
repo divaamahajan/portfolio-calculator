@@ -1,6 +1,7 @@
 async function getDates(symbol = 'AAPL,GOOGL', date_from = '2023-01-25', date_to = '2023-01-31', allocation = [0.5, 0.5], initialBalance = 1000) {
   const key = process.env.MARKETSTACK_API_KEY;
   let url = `http://api.marketstack.com/v1/eod?access_key=${key}&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}`
+  console.log("Inside API symbol", symbol)
   const res = await fetch(url, {
     method: 'GET',
   })

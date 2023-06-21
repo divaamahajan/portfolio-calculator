@@ -33,7 +33,7 @@ const PortfolioAllocationChartWithLegend = (props) => {
     Object.keys(firstRow.stocks).forEach((stock) => {
       const stockAllocation = stock;
       const stockPrice = firstRow.stocks[stock];
-      console.log("first row", stockAllocation);
+      // console.log("first row", stockAllocation);
 
       calculatedEndDateAllocation[stockAllocation] = {
         allocation: ((stockPrice * 100) / firstRow.total).toFixed(2),
@@ -47,13 +47,19 @@ const PortfolioAllocationChartWithLegend = (props) => {
 
   const calculatedPortfolioAllocation = calculatePortfolioAllocation();
   const calculatedEndDateAllocation = calculateEndDateAllocation();
+  
+const sortedKeys = Object.keys(calculatedPortfolioAllocation).sort();
+const sortedCalculatedEndDateAllocation = {};
 
+for (const key of sortedKeys) {
+  sortedCalculatedEndDateAllocation[key] = calculatedEndDateAllocation[key];
+}
   return (
     <div>
-      <div className="chart-legend">
+      <div>
         <PortfolioAllocationTable
           initialAllocation={calculatedPortfolioAllocation}
-          finalAllocation={calculatedEndDateAllocation}
+          finalAllocation={sortedCalculatedEndDateAllocation}
         />
       </div>
       <div className="chart-container">
@@ -66,7 +72,7 @@ const PortfolioAllocationChartWithLegend = (props) => {
         <div className="chart">
           <h1 className="chart-title">End Date Allocation</h1>
           <PortfolioAllocationPieChart
-            portfolioAllocation={calculatedEndDateAllocation}
+            portfolioAllocation={sortedCalculatedEndDateAllocation}
           />
         </div>
       </div>
