@@ -1,8 +1,14 @@
 .portfolio-value-table-container {
   background-color: #f2f7fc;
   padding: 20px;
+  width: 80%;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  flex: content;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin: 0 auto 70px;
 }
 .highlighted-row {
   background-color: rgb(255, 255, 138);
@@ -13,6 +19,8 @@
   border-collapse: collapse;
   text-align: center;
   background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin: 0 auto ;
 }
 
 .portfolio-value-table th,

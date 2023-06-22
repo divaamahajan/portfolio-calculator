@@ -100,6 +100,15 @@
   opacity: 1;
   visibility: visible;
 }
+.deleteButton:hover,
+.editButton:hover,
+.saveButton:hover,
+.addButton:hover,
+.cancelButton:hover 
+{
+  transform: translateZ(0) scale(1.1);
+}
+
 .stock-allocations li {
   display: flex;
   justify-content: flex-end; /* Right-align the buttons */
@@ -192,7 +201,6 @@
   font-size: 14px;
   cursor: pointer;
 }
-
 .btn-primary,
 .btn-secondary {
   padding: 12px 24px;
@@ -202,6 +210,13 @@
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateZ(0) scale(1.1);
 }
 
 .btn-primary {
@@ -268,7 +283,6 @@
   margin-right: 10px;
   justify-self: start;
 }
-
 
 .description {
   margin-right: 10px;
