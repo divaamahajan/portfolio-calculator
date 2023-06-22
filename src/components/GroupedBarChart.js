@@ -12,7 +12,7 @@ const GroupedBarChart = (props) => {
   }));
 
   return (
-    <ResponsiveContainer width="75%" height={300}>
+    <ResponsiveContainer width="75%" height={250}>
       <BarChart data={data}>
         <XAxis dataKey="stock" />
         <YAxis />

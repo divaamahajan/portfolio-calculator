@@ -24,6 +24,7 @@ const PortfolioValueTable = (props) => {
       return "black";
     }
   };
+  portfolioValuePerDay.reverse();
 
   return (
     <div className="portfolio-value-table-container">

@@ -29,12 +29,12 @@
   font-weight: bold;
 }
 
-/* .portfolio-value-table tbody tr:nth-child(even) {
+.portfolio-value-table tbody tr:nth-child(even) {
   background-color: #f6fbff;
-} */
+}
 
 
-/* .portfolio-value-table th:first-child,
+.portfolio-value-table th:first-child,
 .portfolio-value-table td:first-child {
   padding-left: 20px;
 }
@@ -42,11 +42,11 @@
 .portfolio-value-table th:last-child,
 .portfolio-value-table td:last-child {
   padding-right: 20px;
-} */
+} 
 
-/* .portfolio-value-table tbody tr:hover {
+ .portfolio-value-table tbody tr:hover {
   background-color: #e6e6e6;
-} */
+}
 
 .portfolio-value-table tbody td {
   border-bottom: 1px solid #ddd;

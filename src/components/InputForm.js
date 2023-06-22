@@ -63,7 +63,7 @@ const InputForm = () => {
   ]);
 
   useEffect(() => {
-    console.log("Remaining Allocation:", remainingAllocation);
+    // console.log("Remaining Allocation:", remainingAllocation);
   }, [remainingAllocation]);
 
   const handleDeleteAllocation = (symbol) => {
@@ -119,37 +119,56 @@ const InputForm = () => {
     let symbolsString = Object.keys(stockAllocations).toString();
     let allocationValues = Object.values(stockAllocations);
     let symbol = symbolsString || "AAPL,GOOGL";
-    let date_from = "";
-    if (fromDate.toString().split(" ")[0] == "Sun") {
-      let sundayDate = new Date(fromDate);
-      sundayDate.setDate(sundayDate.getDate() - 2);
-      date_from = sundayDate.toISOString().split("T")[0].toString();
-    } else if (fromDate.toString().split(" ")[0] == "Sat") {
-      let saturdayDate = new Date(fromDate);
-      saturdayDate.setDate(saturdayDate.getDate() - 1);
-      date_from = saturdayDate.toISOString().split("T")[0].toString();
-    } else {
-      date_from =
-        fromDate.toISOString().split("T")[0].toString() || "2023-05-23";
+    function getPreviousWeekdayDate(date) {
+      if (date.toString().split(" ")[0] === "Sun") {
+        const sundayDate = new Date(date);
+        sundayDate.setDate(sundayDate.getDate() - 2);
+        return sundayDate.toISOString().split("T")[0].toString();
+      } else if (date.toString().split(" ")[0] === "Sat") {
+        const saturdayDate = new Date(date);
+        saturdayDate.setDate(saturdayDate.getDate() - 1);
+        return saturdayDate.toISOString().split("T")[0].toString();
+      } else {
+        return date;
+      }
     }
 
+    let date_from = "";
     let date_to = "";
-    if (toDate) {
-      date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
-      if (toDate.toString().split(" ")[0] == "Sun") {
-        let sundayDate = new Date(toDate);
-        sundayDate.setDate(sundayDate.getDate() - 2);
-        date_to = sundayDate.toISOString().split("T")[0].toString();
-      } else if (toDate.toString().split(" ")[0] == "Sat") {
-        let saturdayDate = new Date(toDate);
-        saturdayDate.setDate(saturdayDate.getDate() - 1);
-        date_to = saturdayDate.toISOString().split("T")[0].toString();
-      } else {
-        date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
-      }
-    } else {
+    date_from = fromDate.toISOString().split("T")[0].toString() || "2023-05-24";
+    if (!toDate) {
       date_to = yesterday.toISOString().split("T")[0].toString();
+    } else {
+      date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
     }
+       
+    date_from = getPreviousWeekdayDate(date_from);
+    date_to = getPreviousWeekdayDate(date_to);
+
+    // console.log("fromDate", fromDate)
+    // console.log("date_from", date_from)
+    // console.log("toDate", toDate)
+    // console.log("date_to", date_to)
+    if (date_from >= date_to) {
+      setInputError(`Start Date ${date_from} must be before end Date ${date_to}`);
+      return;
+    }
+    // if (toDate) {
+    //   date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
+    //   if (toDate.toString().split(" ")[0] == "Sun") {
+    //     let sundayDate = new Date(toDate);
+    //     sundayDate.setDate(sundayDate.getDate() - 2);
+    //     date_to = sundayDate.toISOString().split("T")[0].toString();
+    //   } else if (toDate.toString().split(" ")[0] == "Sat") {
+    //     let saturdayDate = new Date(toDate);
+    //     saturdayDate.setDate(saturdayDate.getDate() - 1);
+    //     date_to = saturdayDate.toISOString().split("T")[0].toString();
+    //   } else {
+    //     date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
+    //   }
+    // } else {
+    //   date_to = yesterday.toISOString().split("T")[0].toString();
+    // }
     let allocation = allocationValues || [0.5, 0.5];
 
     const data = { symbol, date_from, date_to, allocation, initialBalance };
@@ -168,7 +187,7 @@ const InputForm = () => {
       initialBalance: initialBalance,
       portfolioAllocation: stockAllocations,
     };
-    console.log("inputDataObj before ", inputDataObj["portfolioAllocation"]);
+    // console.log("inputDataObj before ", inputDataObj["portfolioAllocation"]);
     let removedAllocation = 0;
     let removedStocks = "";
 
@@ -194,7 +213,7 @@ const InputForm = () => {
 
       setMessage(msg);
     }
-    console.log("inputDataObj after ", inputDataObj["portfolioAllocation"]);
+    // console.log("inputDataObj after ", inputDataObj["portfolioAllocation"]);
     setInputData(inputDataObj);
     // Hide the form container
     const formContainer = document.querySelector(".form-container");
@@ -277,22 +296,6 @@ const InputForm = () => {
     setCurrSymbol("");
     setCurrPercentage("");
   };
-  // const fetchUserInputJson = (
-  //   startDate,
-  //   endDate,
-  //   initialBalance,
-  //   portfolioAllocation
-  // ) => {
-  //   const inputDataObj = {
-  //     startDate: startDate,
-  //     endDate: endDate,
-  //     initialBalance: initialBalance,
-  //     portfolioAllocation: portfolioAllocation,
-  //   };
-
-  //   console.log("InputData", inputDataObj);
-  //   setInputData(inputDataObj);
-  // };
 
   const resetState = () => {
     // Show the form container

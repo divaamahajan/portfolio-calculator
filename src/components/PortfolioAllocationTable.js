@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import "../styles/PortfolioValueTable.css";
-import GroupedBarChart from "./GroupedBarChart";
-import PortfolioAllocationPieChart from "./PortfolioAllocationPieChart";
+// import GroupedBarChart from "./GroupedBarChart";
+// import PortfolioAllocationPieChart from "./PortfolioAllocationPieChart";
 
 const PortfolioAllocationTable = (props) => {
   const { initialAllocation, finalAllocation } = props;
@@ -39,7 +39,7 @@ const PortfolioAllocationTable = (props) => {
               <th key={stock}>{stock}</th>
             ))}
             <th>Total (USD)</th>
-            <th></th>
+            {/* <th></th> */}
           </tr>
         </thead>
         <tbody>
@@ -72,13 +72,13 @@ const PortfolioAllocationTable = (props) => {
               </span>
               )
             </td>
-            <td>
+            {/* <td>
               <GroupedBarChart
                 stocks={stocks}
                 initialAllocation={initialAllocation}
                 finalAllocation={finalAllocation}
               />
-            </td>
+            </td> */}
           </tr>
           <tr>
             <td className="first-column">Initial Allocation (USD)</td>
@@ -89,11 +89,11 @@ const PortfolioAllocationTable = (props) => {
               </td>
             ))}
             <td>$ {initialTotal}</td>
-            <td>
+            {/* <td>
               <PortfolioAllocationPieChart
                 portfolioAllocation={initialAllocation}
               />
-            </td>
+            </td> */}
           </tr>
         </tbody>
       </table>

@@ -30,10 +30,7 @@ const VisualisationTabs = (props) => {
     stockDates.sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
 
     const defaultStartDate = stockDates[stockDates.length - 1]; // oldest date as the default start date
-    // console.log("right before line 32");
     stockDates.forEach((date) => {
-      // console.log("inside stockDates.forEach");
-      // console.log(date, startDate, endDate);
       if (date >= startDate && date <= endDate) {
         // console.log("inside if statement");
         if (!portfolioValue[date]) {
@@ -43,7 +40,6 @@ const VisualisationTabs = (props) => {
             profits: {},
           };
         }
-
         const allocationPercentage = portfolioAllocation[stock];
         const stockPrice = stockData[date].close;
         const sharesCount =
@@ -66,8 +62,15 @@ const VisualisationTabs = (props) => {
     });
   });
 
+  console.log("portfolioValue", portfolioValue)
+  const dates = Object.keys(portfolioValue);
+  const sortedDates = dates.sort((a, b) => new Date(a) - new Date(b));
+  const sortedPortfolioValue = {};
+  sortedDates.forEach((date) => {
+    sortedPortfolioValue[date] = portfolioValue[date];
+  });
   const result = {
-    totalPortfolioValue: portfolioValue[endDate].total.toFixed(2),
+    totalPortfolioValue: sortedPortfolioValue[endDate].total.toFixed(2),
     portfolioAllocation: Object.keys(portfolioAllocation).reduce(
       (allocationObj, stock) => {
         allocationObj[stock] = {
@@ -78,8 +81,8 @@ const VisualisationTabs = (props) => {
       },
       {}
     ),
-    portfolioValuePerDay: Object.keys(portfolioValue).map((date) => {
-      const portfolioDateValue = portfolioValue[date];
+    portfolioValuePerDay: Object.keys(sortedPortfolioValue).map((date) => {
+      const portfolioDateValue = sortedPortfolioValue[date];
       const stocks = portfolioDateValue.stocks;
       const stockValues = Object.keys(stocks).reduce(
         (stockValuesObj, stock) => {
@@ -115,17 +118,17 @@ const VisualisationTabs = (props) => {
         <TabList className="custom-tab-list">
           <Tab className="custom-tab">Portfolio Breakdown</Tab>
           <Tab className="custom-tab">Daily Portfolio Value Table</Tab>
-          <Tab className="custom-tab">Daily Portfolio Value Line Chart</Tab>
+          <Tab className="custom-tab">Daily Portfolio Growth Chart</Tab>
           {/* <Tab className="custom-tab">Daily Portfolio Value Stacked Bar Chart</Tab> */}
           {/* <Tab className="custom-tab">Stock Price Candlestick Chart</Tab> */}
-          <Tab className="custom-tab">Daily Profits and Losses of Company</Tab>
+          <Tab className="custom-tab">Daily Stocks Growth</Tab>
           <Tab className="custom-tab">Cumulative Profits and Losses</Tab>
         </TabList>
 
         <TabPanel>
           <PortfolioAllocationChartWithLegend
             userInputData={userInputData}
-            portfolioValuePerDay={result.portfolioValuePerDay}
+            portfolioValuePerDay={result.portfolioValuePerDay[result.portfolioValuePerDay.length - 1]}
           />
         </TabPanel>
         <TabPanel>
