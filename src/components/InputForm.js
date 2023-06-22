@@ -145,30 +145,10 @@ const InputForm = () => {
     date_from = getPreviousWeekdayDate(date_from);
     date_to = getPreviousWeekdayDate(date_to);
 
-    // console.log("fromDate", fromDate)
-    // console.log("date_from", date_from)
-    // console.log("toDate", toDate)
-    // console.log("date_to", date_to)
     if (date_from >= date_to) {
       setInputError(`Start Date ${date_from} must be before end Date ${date_to}`);
       return;
     }
-    // if (toDate) {
-    //   date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
-    //   if (toDate.toString().split(" ")[0] == "Sun") {
-    //     let sundayDate = new Date(toDate);
-    //     sundayDate.setDate(sundayDate.getDate() - 2);
-    //     date_to = sundayDate.toISOString().split("T")[0].toString();
-    //   } else if (toDate.toString().split(" ")[0] == "Sat") {
-    //     let saturdayDate = new Date(toDate);
-    //     saturdayDate.setDate(saturdayDate.getDate() - 1);
-    //     date_to = saturdayDate.toISOString().split("T")[0].toString();
-    //   } else {
-    //     date_to = toDate.toISOString().split("T")[0].toString() || "2023-05-24";
-    //   }
-    // } else {
-    //   date_to = yesterday.toISOString().split("T")[0].toString();
-    // }
     let allocation = allocationValues || [0.5, 0.5];
 
     const data = { symbol, date_from, date_to, allocation, initialBalance };
@@ -221,13 +201,6 @@ const InputForm = () => {
 
     const submitButton = document.querySelector(".submit-button");
     submitButton.style.display = "none";
-    // router.push({
-    //   pathname: "/results",
-    //   query: {
-    //     marketStackData: marketStackData,
-    //     inputData: inputDataObj,
-    //   },
-    // });
   };
 
   const handlePercentageChange = (event) => {

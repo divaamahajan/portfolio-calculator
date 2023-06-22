@@ -30,8 +30,7 @@ const PortfolioValueLineChart = ({ portfolioValuePerDay }) => {
   return (
     <div className="portfolio-value-table-container">
       <h2 className="portfolio-value-table-title">
-        Portfolio Growth from {portfolioValuePerDay[0].date} to{" "}
-        {portfolioValuePerDay[portfolioValuePerDay.length - 1].date}
+        Portfolio Growth
       </h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>

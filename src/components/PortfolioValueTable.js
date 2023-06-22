@@ -24,7 +24,7 @@ const PortfolioValueTable = (props) => {
       return "black";
     }
   };
-  portfolioValuePerDay.reverse();
+  const reversedPortfolioValuePerDay = [...portfolioValuePerDay].reverse();
 
   return (
     <div className="portfolio-value-table-container">
@@ -36,17 +36,16 @@ const PortfolioValueTable = (props) => {
         <thead>
           <tr>
             <th>Date</th>
-            {Object.keys(portfolioValuePerDay[0].stocks).map((stock) => (
+            {Object.keys(reversedPortfolioValuePerDay[0].stocks).map((stock) => (
               <React.Fragment key={stock}>
                 <th>{stock} Value (USD)</th>
-                {/* <th>{stock} Profit (USD)</th> */}
               </React.Fragment>
             ))}
             <th>Total Portfolio Worth (USD)</th>
           </tr>
         </thead>
         <tbody>
-          {portfolioValuePerDay.map((item, index) => (
+          {reversedPortfolioValuePerDay.map((item, index) => (
             <tr
               key={item.date}
               className={index === 0 ? "highlighted-row" : ""}
