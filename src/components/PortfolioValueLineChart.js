@@ -20,13 +20,6 @@ const PortfolioValueLineChart = ({ portfolioValuePerDay }) => {
 
   const lowestValue = Math.min(...data.map((entry) => entry.total));
   const yAxisDomain = [lowestValue - 100, "auto"];
-  // console.log("portfolioValuePerDay", portfolioValuePerDay)
-  // console.log("First date", portfolioValuePerDay[0].date);
-  // console.log(
-  //   "Last date",
-  //   portfolioValuePerDay[portfolioValuePerDay.length - 1].date
-  // );
-
   return (
     <div className="portfolio-value-table-container">
       <h2 className="portfolio-value-table-title">
