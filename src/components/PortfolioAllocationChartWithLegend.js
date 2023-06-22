@@ -26,7 +26,7 @@ const PortfolioAllocationChartWithLegend = (props) => {
 
     return calculatedAllocation;
   };
-  const calculateEndDateAllocation = () => {
+  const calculateEndDateAllocation = (initialPrice) => {
     const calculatedEndDateAllocation = {};
     const firstRow = portfolioValuePerDay[0];
 
@@ -36,37 +36,40 @@ const PortfolioAllocationChartWithLegend = (props) => {
       // console.log("first row", stockAllocation);
 
       calculatedEndDateAllocation[stockAllocation] = {
-        allocation: ((stockPrice * 100) / firstRow.total).toFixed(2),
+        allocation: (((stockPrice/initialPrice[stock].stockPrice)-1)*100).toFixed(2),
         stockPrice: stockPrice,
         total: firstRow.total,
       };
+      console.log("calculatedEndDateAllocation", calculatedEndDateAllocation)
     });
 
     return calculatedEndDateAllocation;
   };
 
   const calculatedPortfolioAllocation = calculatePortfolioAllocation();
-  const calculatedEndDateAllocation = calculateEndDateAllocation();
+  const calculatedEndDateAllocation = calculateEndDateAllocation(calculatedPortfolioAllocation);
   
 const sortedKeys = Object.keys(calculatedPortfolioAllocation).sort();
 const sortedCalculatedEndDateAllocation = {};
+const sortedCalculatedStartDateAllocation = {};
 
 for (const key of sortedKeys) {
   sortedCalculatedEndDateAllocation[key] = calculatedEndDateAllocation[key];
+  sortedCalculatedStartDateAllocation[key] = calculatedPortfolioAllocation[key];
 }
   return (
     <div>
       <div>
         <PortfolioAllocationTable
-          initialAllocation={calculatedPortfolioAllocation}
+          initialAllocation={sortedCalculatedStartDateAllocation}
           finalAllocation={sortedCalculatedEndDateAllocation}
         />
       </div>
-      <div className="chart-container">
+      {/* <div className="chart-container">
         <div className="chart">
           <h1 className="chart-title">Initial Allocation</h1>
           <PortfolioAllocationPieChart
-            portfolioAllocation={calculatedPortfolioAllocation}
+            portfolioAllocation={sortedCalculatedStartDateAllocation}
           />
         </div>
         <div className="chart">
@@ -75,7 +78,7 @@ for (const key of sortedKeys) {
             portfolioAllocation={sortedCalculatedEndDateAllocation}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

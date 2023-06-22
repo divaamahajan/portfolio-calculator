@@ -18,9 +18,9 @@ const VisualisationTabs = (props) => {
   const endDate = userInputData.endDate;
   const initialBalance = userInputData.initialBalance; // 32500
   const portfolioAllocation = userInputData.portfolioAllocation; //AAPL: 0.2,   GOOG: 0.5,  MSFT: 0.3
-  console.log("portfolioAllocation", portfolioAllocation)
-  console.log("tradingData", tradingData)
-  console.log("userInputData", userInputData)
+  // console.log("portfolioAllocation", portfolioAllocation)
+  // console.log("tradingData", tradingData)
+  // console.log("userInputData", userInputData)
 
   const portfolioValue = {};
   Object.keys(tradingData.data).forEach((stock) => {
@@ -113,7 +113,7 @@ const VisualisationTabs = (props) => {
     <div className="pb-44">
       <Tabs selectedIndex={activeTab} onSelect={(index) => setActiveTab(index)}>
         <TabList className="custom-tab-list">
-          <Tab className="custom-tab">Portfolio Allocation</Tab>
+          <Tab className="custom-tab">Portfolio Breakdown</Tab>
           <Tab className="custom-tab">Daily Portfolio Value Table</Tab>
           <Tab className="custom-tab">Daily Portfolio Value Line Chart</Tab>
           {/* <Tab className="custom-tab">Daily Portfolio Value Stacked Bar Chart</Tab> */}

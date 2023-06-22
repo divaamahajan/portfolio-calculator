@@ -28,7 +28,9 @@ const PortfolioValueTable = (props) => {
   return (
     <div className="portfolio-value-table-container">
       <h2 className="portfolio-value-table-title">Portfolio Value </h2>
-      <h3 className="portfolio-value-table-sub-title"><i>(Initial Balance {initialBalance} USD)</i></h3>
+      <h3 className="portfolio-value-table-sub-title">
+        <i>(Initial Balance {initialBalance} USD)</i>
+      </h3>
       <table className="portfolio-value-table">
         <thead>
           <tr>
@@ -36,7 +38,7 @@ const PortfolioValueTable = (props) => {
             {Object.keys(portfolioValuePerDay[0].stocks).map((stock) => (
               <React.Fragment key={stock}>
                 <th>{stock} Value (USD)</th>
-                <th>{stock} Profit (USD)</th>
+                {/* <th>{stock} Profit (USD)</th> */}
               </React.Fragment>
             ))}
             <th>Total Portfolio Worth (USD)</th>
@@ -44,17 +46,37 @@ const PortfolioValueTable = (props) => {
         </thead>
         <tbody>
           {portfolioValuePerDay.map((item, index) => (
-            <tr key={item.date} className={index === 0 ? "highlighted-row" : ""}>
+            <tr
+              key={item.date}
+              className={index === 0 ? "highlighted-row" : ""}
+            >
               <td>{item.date}</td>
               {Object.keys(item.stocks).map((stock) => (
                 <React.Fragment key={stock}>
-                  <td>{item.stocks[stock]}</td>
-                  <td style={{ color: getProfitColor(item.profits[stock]) }}>
-                    {item.profits[stock].toFixed(2)}
+                  <td>
+                    {item.stocks[stock]}{" "}
+                    <span
+                      style={{ color: getProfitColor(item.profits[stock]) }}
+                    >
+                      {item.profits[stock].toFixed(2) > 0
+                        ? `(+${item.profits[stock].toFixed(2)}$)`
+                        : `(${item.profits[stock].toFixed(2)}$)`}
+                    </span>
                   </td>
                 </React.Fragment>
               ))}
-              <td style={{ color: getTotalColor(item.total) }}>{item.total} ({((item.total - initialBalance) / initialBalance * 100).toFixed(2)})%</td>
+              <td style={{ color: getTotalColor(item.total) }}>
+                {item.total}{" "}
+                {item.total - initialBalance > 0
+                  ? `(+${(
+                      ((item.total - initialBalance) / initialBalance) *
+                      100
+                    ).toFixed(2)}%)`
+                  : `(${(
+                      ((item.total - initialBalance) / initialBalance) *
+                      100
+                    ).toFixed(2)}%)`}
+              </td>
             </tr>
           ))}
         </tbody>
