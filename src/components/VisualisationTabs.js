@@ -121,7 +121,7 @@ const VisualisationTabs = (props) => {
           <Tab className="custom-tab">Daily Portfolio Growth Chart</Tab>
           {/* <Tab className="custom-tab">Daily Portfolio Value Stacked Bar Chart</Tab> */}
           {/* <Tab className="custom-tab">Stock Price Candlestick Chart</Tab> */}
-          <Tab className="custom-tab">Daily Stocks Growth</Tab>
+          <Tab className="custom-tab">Daily Stocks Stacked Growth</Tab>
           <Tab className="custom-tab">Cumulative Profits and Losses</Tab>
         </TabList>
 
