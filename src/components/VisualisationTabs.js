@@ -7,7 +7,7 @@ import "../styles/VisualisationTabs.css";
 import PortfolioValueLineChart from "./PortfolioValueLineChart";
 import PortfolioValueStackedBarChart from "./PortfolioValueStackedBarChart";
 // import StockPriceCandlestickChart from "./StockPriceCandlestickChart";
-import CompanyProfitsBarChart from "./CompanyProfitsBarChart";
+// import CompanyProfitsBarChart from "./CompanyProfitsBarChart";
 import CumulativeProfitsAreaChart from "./CumulativeProfitsAreaChart";
 import "react-tabs/style/react-tabs.css";
 
@@ -121,7 +121,7 @@ const VisualisationTabs = (props) => {
           <Tab className="custom-tab">Daily Portfolio Growth Chart</Tab>
           <Tab className="custom-tab">Daily Stocks Stacked Growth</Tab>
           {/* <Tab className="custom-tab">Stock Price Candlestick Chart</Tab> */}
-          <Tab className="custom-tab">Daily Profits and Losses</Tab>
+          {/* <Tab className="custom-tab">Daily Profits and Losses</Tab> */}
           <Tab className="custom-tab">Cumulative Profits and Losses</Tab>
         </TabList>
 
@@ -150,11 +150,11 @@ const VisualisationTabs = (props) => {
         {/* <TabPanel>
           <StockPriceCandlestickChart tradingData={tradingData.data} />
         </TabPanel> */}
-        <TabPanel>
+        {/* <TabPanel>
           <CompanyProfitsBarChart
             portfolioValuePerDay={result.portfolioValuePerDay}
           />
-        </TabPanel>
+        </TabPanel> */}
         <TabPanel>
           <CumulativeProfitsAreaChart
             portfolioValuePerDay={result.portfolioValuePerDay}
