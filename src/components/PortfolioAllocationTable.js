@@ -39,7 +39,6 @@ const PortfolioAllocationTable = (props) => {
               <th key={stock}>{stock}</th>
             ))}
             <th>Total (USD)</th>
-            {/* <th></th> */}
           </tr>
         </thead>
         <tbody>
@@ -49,10 +48,9 @@ const PortfolioAllocationTable = (props) => {
               <td key={stock}>
                 $ {finalAllocation[stock].stockPrice} (
                 <span
-                  className={getPercentageClassName(
-                    ((finalTotal - initialTotal) * 100) / initialTotal
-                  )}
+                  className={getPercentageClassName(finalAllocation[stock].allocation)}
                 >
+                  {finalAllocation[stock].allocation > 0 ? `+` : ``}
                   {finalAllocation[stock].allocation}%
                 </span>
                 )
@@ -61,10 +59,9 @@ const PortfolioAllocationTable = (props) => {
             <td>
               $ {finalTotal} (
               <span
-                className={getPercentageClassName(
-                  ((finalTotal - initialTotal) * 100) / initialTotal
-                )}
+                className={getPercentageClassName(finalTotal - initialTotal)}
               >
+                {finalTotal - initialTotal > 0 ? `+` : ``}
                 {(((finalTotal - initialTotal) * 100) / initialTotal).toFixed(
                   2
                 )}
@@ -72,13 +69,6 @@ const PortfolioAllocationTable = (props) => {
               </span>
               )
             </td>
-            {/* <td>
-              <GroupedBarChart
-                stocks={stocks}
-                initialAllocation={initialAllocation}
-                finalAllocation={finalAllocation}
-              />
-            </td> */}
           </tr>
           <tr>
             <td className="first-column">Initial Allocation (USD)</td>
@@ -89,11 +79,6 @@ const PortfolioAllocationTable = (props) => {
               </td>
             ))}
             <td>$ {initialTotal}</td>
-            {/* <td>
-              <PortfolioAllocationPieChart
-                portfolioAllocation={initialAllocation}
-              />
-            </td> */}
           </tr>
         </tbody>
       </table>

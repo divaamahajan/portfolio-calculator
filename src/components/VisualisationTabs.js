@@ -7,7 +7,7 @@ import "../styles/VisualisationTabs.css";
 import PortfolioValueLineChart from "./PortfolioValueLineChart";
 import PortfolioValueStackedBarChart from "./PortfolioValueStackedBarChart";
 // import StockPriceCandlestickChart from "./StockPriceCandlestickChart";
-// import CompanyProfitsBarChart from "./CompanyProfitsBarChart";
+import CompanyProfitsBarChart from "./CompanyProfitsBarChart";
 import CumulativeProfitsAreaChart from "./CumulativeProfitsAreaChart";
 import "react-tabs/style/react-tabs.css";
 
@@ -19,12 +19,13 @@ const VisualisationTabs = (props) => {
   const initialBalance = userInputData.initialBalance; // 32500
   const portfolioAllocation = userInputData.portfolioAllocation; //AAPL: 0.2,   GOOG: 0.5,  MSFT: 0.3
   // console.log("portfolioAllocation", portfolioAllocation)
-  // console.log("tradingData", tradingData)
+  console.log("tradingData", tradingData)
   // console.log("userInputData", userInputData)
 
   const portfolioValue = {};
   Object.keys(tradingData.data).forEach((stock) => {
-    const stockData = tradingData.data[stock]; //AAPL, GOOG, MSFT
+    const stockData = tradingData.data[stock]; //AAPL : {2023-06-22: {…}, 2023-06-21: {…}, 2023-06-20: {…}, 2023-06-16: {…}, 2023-06-15: {…}, …}
+    
     const stockDates = Object.keys(stockData); //2019-02-01, 2019-01-31, 2019-01-30
 
     stockDates.sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
@@ -32,7 +33,6 @@ const VisualisationTabs = (props) => {
     const defaultStartDate = stockDates[stockDates.length - 1]; // oldest date as the default start date
     stockDates.forEach((date) => {
       if (date >= startDate && date <= endDate) {
-        // console.log("inside if statement");
         if (!portfolioValue[date]) {
           portfolioValue[date] = {
             total: 0,
@@ -48,7 +48,6 @@ const VisualisationTabs = (props) => {
 
         portfolioValue[date].stocks[stock] = stockValue;
         portfolioValue[date].total += stockValue;
-        // console.log("portfolioValue[date].total", portfolioValue[date].total);
 
         const initialStockPrice = !stockData[startDate]
           ? stockData[defaultStartDate].close // Use the default start date for initial stock price
@@ -62,13 +61,13 @@ const VisualisationTabs = (props) => {
     });
   });
 
-  console.log("portfolioValue", portfolioValue)
   const dates = Object.keys(portfolioValue);
   const sortedDates = dates.sort((a, b) => new Date(a) - new Date(b));
   const sortedPortfolioValue = {};
   sortedDates.forEach((date) => {
     sortedPortfolioValue[date] = portfolioValue[date];
   });
+  console.log("sortedPortfolioValue", sortedPortfolioValue)
   const result = {
     totalPortfolioValue: sortedPortfolioValue[endDate].total.toFixed(2),
     portfolioAllocation: Object.keys(portfolioAllocation).reduce(
@@ -111,7 +110,7 @@ const VisualisationTabs = (props) => {
       };
     }),
   };
-
+  console.log("result", result)
   return (
     <div className="pb-44">
       <Tabs selectedIndex={activeTab} onSelect={(index) => setActiveTab(index)}>
@@ -121,7 +120,7 @@ const VisualisationTabs = (props) => {
           <Tab className="custom-tab">Daily Portfolio Growth Chart</Tab>
           <Tab className="custom-tab">Daily Stocks Stacked Growth</Tab>
           {/* <Tab className="custom-tab">Stock Price Candlestick Chart</Tab> */}
-          {/* <Tab className="custom-tab">Daily Profits and Losses</Tab> */}
+          <Tab className="custom-tab">Daily Profits and Losses</Tab>
           <Tab className="custom-tab">Cumulative Profits and Losses</Tab>
         </TabList>
 
@@ -150,13 +149,15 @@ const VisualisationTabs = (props) => {
         {/* <TabPanel>
           <StockPriceCandlestickChart tradingData={tradingData.data} />
         </TabPanel> */}
-        {/* <TabPanel>
+        <TabPanel>
           <CompanyProfitsBarChart
+            userInputData={userInputData}
             portfolioValuePerDay={result.portfolioValuePerDay}
           />
-        </TabPanel> */}
+        </TabPanel>
         <TabPanel>
           <CumulativeProfitsAreaChart
+            userInputData={userInputData}
             portfolioValuePerDay={result.portfolioValuePerDay}
           />
         </TabPanel>
