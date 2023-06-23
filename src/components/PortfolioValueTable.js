@@ -36,11 +36,13 @@ const PortfolioValueTable = (props) => {
         <thead>
           <tr>
             <th>Date</th>
-            {Object.keys(reversedPortfolioValuePerDay[0].stocks).map((stock) => (
-              <React.Fragment key={stock}>
-                <th>{stock} Value (USD)</th>
-              </React.Fragment>
-            ))}
+            {Object.keys(reversedPortfolioValuePerDay[0].stocks).map(
+              (stock) => (
+                <React.Fragment key={stock}>
+                  <th>{stock} Value (USD)</th>
+                </React.Fragment>
+              )
+            )}
             <th>Total Portfolio Worth (USD)</th>
           </tr>
         </thead>
@@ -58,9 +60,8 @@ const PortfolioValueTable = (props) => {
                     <span
                       style={{ color: getProfitColor(item.profits[stock]) }}
                     >
-                      {item.profits[stock].toFixed(2) > 0
-                        ? `(+${item.profits[stock].toFixed(2)}$)`
-                        : `(${item.profits[stock].toFixed(2)}$)`}
+                      ({item.profits[stock].toFixed(2) > 0 ? `+` : ``}
+                      {item.profits[stock].toFixed(2)}$)
                     </span>
                   </td>
                 </React.Fragment>
